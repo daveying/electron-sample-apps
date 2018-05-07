@@ -27,3 +27,4 @@ electron-sample-apps is published under the Apache v2 license. See `LICENSE` for
 If this project helps you out, you can give me a cup of coffee :)
 
 [![paypal](https://img.shields.io/badge/donate-paypal-brightgreen.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ZVNVLSK6P6JRG)
+
