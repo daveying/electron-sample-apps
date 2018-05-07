@@ -18,14 +18,14 @@ app.on('window-all-closed', function() {
 app.on('ready', function() {
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    width: 600, 
+    width: 1200, 
     height: 500,
     // webPreferences: {
     //     nodeIntegration: false,
     //     preload: 'js/preload.js'
     // }
   });
-  //mainWindow.openDevTools();
+  mainWindow.openDevTools();
 
   // and load the index.html of the app.
   mainWindow.loadURL('file://' + __dirname + '/index.html');

@@ -4,7 +4,7 @@
 const fs = require('fs');
 
 document.addEventListener('DOMContentLoaded', function() {
-    if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
+    //if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
 
     var SCREEN_WIDTH = window.innerWidth;
     var SCREEN_HEIGHT = window.innerHeight;
@@ -15,6 +15,8 @@ document.addEventListener('DOMContentLoaded', function() {
     var camera, scene;
     var webglRenderer;
 
+    var animationLoopId = null;
+
     var zmesh, geometry;
 
     var mouseX = 0, mouseY = 0;
@@ -23,28 +25,30 @@ document.addEventListener('DOMContentLoaded', function() {
     var windowHalfX = window.innerWidth / 2;
     var windowHalfY = window.innerHeight / 2;
 
-    // document.addEventListener( 'mousedown', onDocumentMouseDown, false );
-    // document.addEventListener( 'mouseup', onDocumentMouseUp, false );
-    // document.addEventListener( 'mousemove', onDocumentMouseMove, false );
-    // document.addEventListener( 'mousewheel', onDocumentMouseWheel, false );
+    document.addEventListener( 'mousedown', onDocumentMouseDown, false );
+    document.addEventListener( 'mouseup', onDocumentMouseUp, false );
+    document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+    document.addEventListener( 'mousewheel', onDocumentMouseWheel, false );
 
     var closeEl = initCloseBtn();
 
     init();
     animate();
 
-    setTimeout(saveIamge, 50);
+    setTimeout(function () {
+      cancelAnimationFrame(animationLoopId);
+    }, 100);
+    setTimeout(saveIamge, 200);
 
     function saveIamge () {
       if (!webglRenderer) {
         return;
       }
 
-      let base64 = webglRenderer.domElement.toDataURL();
+      let base64 = webglRenderer.domElement.toDataURL('image/png');
       var base64Data = base64.replace(/^data:image\/png;base64,/, "");
-      console.log(base64Data);
-      console.log(base64);
-  
+      //console.log(base64);
+      
       fs.writeFile("./logo.png", base64Data, 'base64', function (err) {
         console.log(err);
       });
@@ -72,7 +76,9 @@ document.addEventListener('DOMContentLoaded', function() {
       scene.add( directionalLight );
 
       // renderer
-      webglRenderer = new THREE.CanvasRenderer();
+      webglRenderer = new THREE.WebGLRenderer({
+        preserveDrawingBuffer: true 
+      });
       webglRenderer.setSize( SCREEN_WIDTH, SCREEN_HEIGHT );
       webglRenderer.domElement.style.position = "relative";
       container.appendChild( webglRenderer.domElement );
@@ -136,7 +142,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function animate() {
-      requestAnimationFrame( animate );
+      animationLoopId = requestAnimationFrame( animate );
       render();
     }
 
