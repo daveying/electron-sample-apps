@@ -1,6 +1,8 @@
 
 // 3D code partially grabbed from http://dev.opera.com/articles/view/porting-3d-graphics-to-the-web-webgl-intro-part-2/
 
+const fs = require('fs');
+
 document.addEventListener('DOMContentLoaded', function() {
     if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
 
@@ -21,15 +23,33 @@ document.addEventListener('DOMContentLoaded', function() {
     var windowHalfX = window.innerWidth / 2;
     var windowHalfY = window.innerHeight / 2;
 
-    document.addEventListener( 'mousedown', onDocumentMouseDown, false );
-    document.addEventListener( 'mouseup', onDocumentMouseUp, false );
-    document.addEventListener( 'mousemove', onDocumentMouseMove, false );
-    document.addEventListener( 'mousewheel', onDocumentMouseWheel, false );
+    // document.addEventListener( 'mousedown', onDocumentMouseDown, false );
+    // document.addEventListener( 'mouseup', onDocumentMouseUp, false );
+    // document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+    // document.addEventListener( 'mousewheel', onDocumentMouseWheel, false );
 
     var closeEl = initCloseBtn();
 
     init();
     animate();
+
+    setTimeout(saveIamge, 50);
+
+    function saveIamge () {
+      if (!webglRenderer) {
+        return;
+      }
+
+      let base64 = webglRenderer.domElement.toDataURL();
+      var base64Data = base64.replace(/^data:image\/png;base64,/, "");
+      console.log(base64Data);
+      console.log(base64);
+  
+      fs.writeFile("./logo.png", base64Data, 'base64', function (err) {
+        console.log(err);
+      });
+
+    }
 
     function init() {
       container = document.createElement( 'div' );
@@ -52,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function() {
       scene.add( directionalLight );
 
       // renderer
-      webglRenderer = new THREE.WebGLRenderer();
+      webglRenderer = new THREE.CanvasRenderer();
       webglRenderer.setSize( SCREEN_WIDTH, SCREEN_HEIGHT );
       webglRenderer.domElement.style.position = "relative";
       container.appendChild( webglRenderer.domElement );
