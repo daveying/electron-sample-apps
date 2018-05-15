@@ -1,4 +1,7 @@
 const fs = require('fs');
+const nodeConsole = require('console');
+var console = new nodeConsole.Console(process.stdout, process.stderr);
+console.log('begin');
 
 document.getElementById('newWindow').href += window.location.hash;
 
