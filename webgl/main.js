@@ -2,16 +2,19 @@ const {app, BrowserWindow} = require('electron');
 
 let mainWindow;
 
+
 // Chrome by default black lists certain GPUs because of bugs.
 // if your are not able to view webgl try enabling --ignore-gpu-blacklist option
 // But, this will make electron/chromium less stable.
-app.commandLine.appendSwitch('--ignore-gpu-blacklist');
+//app.commandLine.appendSwitch('--ignore-gpu-blacklist');
+//app.commandLine.appendSwitch('--disable-gpu');
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function() {
   if (process.platform != 'darwin')
     app.quit();
 });
+
 
 // This method will be called when Electron has done everything
 // initialization and ready for creating browser windows.
@@ -28,7 +31,7 @@ app.on('ready', function() {
   mainWindow.openDevTools();
 
   // and load the index.html of the app.
-  mainWindow.loadURL('file://' + __dirname + '/index.html');
+  mainWindow.loadURL('file://' + __dirname + '/material-browser.html#MeshPhongMaterial');
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function() {
