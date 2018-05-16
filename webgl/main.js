@@ -6,12 +6,12 @@ let mainWindow;
 // Chrome by default black lists certain GPUs because of bugs.
 // if your are not able to view webgl try enabling --ignore-gpu-blacklist option
 // But, this will make electron/chromium less stable.
-//app.commandLine.appendSwitch('--ignore-gpu-blacklist');
+app.commandLine.appendSwitch('--ignore-gpu-blacklist');
 //app.commandLine.appendSwitch('--disable-gpu');
 //app.commandLine.appendSwitch('--use-gl', 'osmesa');
-app.commandLine.appendSwitch('--swiftshader');
-app.commandLine.appendSwitch('--swiftshader-webgl');
-app.commandLine.appendSwitch('--use-gl', 'swiftshader');
+//app.commandLine.appendSwitch('--swiftshader');
+//app.commandLine.appendSwitch('--swiftshader-webgl');
+//app.commandLine.appendSwitch('--use-gl', 'swiftshader');
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function() {
@@ -27,6 +27,7 @@ app.on('ready', function() {
   mainWindow = new BrowserWindow({
     width: 1200, 
     height: 500,
+    show: false
     // webPreferences: {
     //     nodeIntegration: false,
     //     preload: 'js/preload.js'
