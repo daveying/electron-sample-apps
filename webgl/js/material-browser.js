@@ -56,8 +56,8 @@ var render = function () {
 
     var time = Date.now() * 0.001;
 
-    // mesh.rotation.x += 0.005;
-    // mesh.rotation.y += 0.005;
+    mesh.rotation.x += 0.005;
+    mesh.rotation.y += 0.005;
 
     if (prevFog !== scene.fog) {
 

@@ -34,6 +34,8 @@ Detector = {
 				'Find out how to get it <a href="http://get.webgl.org/" style="color:#000">here</a>.'
 			].join( '\n' );
 
+			console.log(element.innerHTML);
+
 		}
 
 		return element;
