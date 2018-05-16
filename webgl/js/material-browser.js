@@ -5,7 +5,7 @@ console.log('begin');
 
 document.getElementById('newWindow').href += window.location.hash;
 
-var gui = new dat.GUI();
+//var gui = new dat.GUI();
 var scene = new THREE.Scene();
 var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 10, 50);
 camera.position.z = 30;
@@ -35,14 +35,15 @@ scene.add(lights[0]);
 scene.add(lights[1]);
 scene.add(lights[2]);
 
-guiScene(gui, scene, camera);
+//guiScene(gui, scene, camera);
 
 var geometry = new THREE.TorusKnotGeometry(10, 3, 100, 16);
 var mesh = new THREE.Mesh(geometry);
 
 generateVertexColors(geometry);
 
-mesh.material = chooseFromHash(gui, mesh, geometry);
+//mesh.material = chooseFromHash(gui, mesh, geometry);
+mesh.material = material = new THREE.MeshPhongMaterial( { color: 0x2194CE } );
 
 generateMorphTargets(mesh, geometry);
 

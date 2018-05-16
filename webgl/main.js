@@ -26,8 +26,7 @@ app.on('ready', function() {
   // Create the browser window.
   mainWindow = new BrowserWindow({
     width: 1200, 
-    height: 500,
-    show: false
+    height: 500
     // webPreferences: {
     //     nodeIntegration: false,
     //     preload: 'js/preload.js'
